@@ -11,6 +11,14 @@ class sheetHandler{
         return undefined;
     }
 
+    static getCoffeeBlock(){
+        let value = coffeeBlockRange.getValue();
+        if(value){
+            return JSON.parse(value);
+        }
+        return undefined;
+    }
+
     static updateRecentVoteBlock(block){
         recentVoteBlockRange.setValue(block);
     }

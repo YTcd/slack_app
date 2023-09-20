@@ -83,5 +83,4 @@ class messageHandler{
         };
         return UrlFetchApp.fetch(url, options);
     }
-
 }

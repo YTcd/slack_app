@@ -23,7 +23,7 @@ class voting {
     static updateVotesReceived(payload){
         const userID = payload.user.id;
         const channelID = payload.channel.id;
-        const block = payload.message.blocks;
+        const block = sheetHandler.getVoteBlockBySheet();
         const messageTs = payload.container.message_ts;
         const value = payload.actions[0].value;
 
@@ -53,7 +53,40 @@ class voting {
             block[itemIndex*2+3].elements[0].text = (chosenCnt*1+1) + "표";
         }
 
-        sheetHandler.updateRecentVoteBlock(block);
+        sheetHandler.updateRecentVoteBlock(JSON.stringify(block));
+        messageHandler.updateMessage(channelID, messageTs, block);
+    }
+
+    static addVoteItem(payload){
+        const channelID = payload.channel.id;
+        const messageTs = payload.container.message_ts;
+
+        let block = payload.message.blocks;
+
+        const textFieldId = utils.extractIDFromBlock(block)
+        let inputValue = "";
+        if(payload.state && payload.state.values){
+            const inputValues = payload.state.values;
+            const inputField = inputValues[textFieldId];
+
+            if(inputField &&
+                inputField["plain_text_input-action"] &&
+                inputField["plain_text_input-action"].value != undefined){
+                inputValue = inputField["plain_text_input-action"].value;
+                inputField["plain_text_input-action"].value = undefined;
+            }
+        }
+
+        if(inputValue != ""){
+            const lastIndex = utils.getLastBlockIndex(block);
+            const newItemIndex = (lastIndex-1)/2+1;
+            const slicedBlock = block.splice(lastIndex+1);
+            block.push(voteBlockGenerator.generateBlock1(newItemIndex,inputValue+""));
+            block.push(voteBlockGenerator.generateBlock2());
+            block.push(...slicedBlock);
+        }
+
+        sheetHandler.updateRecentVoteBlock(JSON.stringify(block));
         messageHandler.updateMessage(channelID, messageTs, block);
     }
 }

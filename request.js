@@ -34,4 +34,8 @@ function onButtonClicked(value, payload) {
     if(value && value.indexOf("vote_0") != -1){
         voting.updateVotesReceived(payload);
     };
+
+    if(value == "addItem"){
+        voting.addVoteItem(payload);
+    }
 }

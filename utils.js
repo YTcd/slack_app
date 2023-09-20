@@ -13,6 +13,31 @@ class utils {
         return undefined;
     }
 
+    static extractIDFromBlock(blocksArr){
+        let blockId = "";
+        if(Array.isArray(blocksArr)){
+            blocksArr.forEach((item)=>{
+                if(item.type == "input"){
+                    blockId = item.block_id;
+                }
+            })
+        }
+        return blockId;
+    }
+
+    static getLastBlockIndex(blocksArr){
+        let lastIndex = 1;
+        if(Array.isArray(blocksArr)){
+            blocksArr.forEach((item,index)=>{
+                if(item.text &&
+                    item.text.type == "mrkdwn"){
+                    lastIndex = index+1;
+                }
+            })
+        }
+        return lastIndex;
+    }
+
     static removeWhiteSpace(wordArr) {
         if (wordArr[0] === "") {
             wordArr.shift();

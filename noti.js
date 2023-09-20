@@ -1,3 +1,11 @@
+function coffeeNoti(){
+    const block1 = sheetHandler.getCoffeeBlock();
+    const block2 = voteBlockGenerator.makeVoteBlock(["커피","아아","뜨아","콜드브루","아샷추","아이스라떼"]);
+
+    sheetHandler.updateRecentVoteBlock(JSON.stringify(block1));
+    messageHandler.postMessage(META_CHANNEL_ID,"",block2);
+}
+
 //목요일 공지
 function notifyToSlack1() {
     triggerSlackRequest("재택", "금주 재택 신청하세요.");

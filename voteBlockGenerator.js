@@ -19,25 +19,48 @@ class voteBlockGenerator{
 
         block.push({type:"divider"});
         block.push({
-            type: "actions",
-            elements: [{
-                type: "button",
-                text: {
-                    type: "plain_text",
-                    text: "항목 추가",
+                "type": "input",
+                "element": {
+                    "type": "plain_text_input",
+                    "action_id": "plain_text_input-action"
                 },
-                style: "primary",
-                value: "add",
-            },{
-                type: "button",
-                text: {
-                    type: "plain_text",
-                    text: "투표z 삭제",
-                },
-                style: "danger",
-                value: "delete",
-            }]
-        })
+                "label": {
+                    "type": "plain_text",
+                    "text": "항목 추가",
+                    "emoji": true
+                }
+            },
+            {
+                "type": "actions",
+                "elements": [
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "항목 추가"
+                        },
+                        "style": "primary",
+                        "value": "addItem"
+                    }
+                ]
+            },
+            {
+                "type": "divider"
+            },
+            {
+                "type": "actions",
+                "elements": [
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": "plain_text",
+                            "text": "투표 삭제"
+                        },
+                        "style": "danger",
+                        "value": "delete"
+                    }
+                ]
+            })
 
         return JSON.stringify(block);
     }
