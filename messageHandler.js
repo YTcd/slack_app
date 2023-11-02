@@ -1,21 +1,21 @@
 class messageHandler{
     static deleteMessage(channelID,ts){
         const url = "https://slack.com/api/chat.delete";
-
+  
         const payload = {
             "token" : OAUTHTOKEN,
             "channel" : channelID,
             "ts" : ts
         };
-
+  
         const params = {
             "method" : "post",
             "payload" : payload
         };
-
+  
         UrlFetchApp.fetch(url, params);
     }
-
+  
     static updateMessage(channelID,ts,block) {
         const url = "https://slack.com/api/chat.update";
         if(!block){
@@ -34,7 +34,7 @@ class messageHandler{
             ts: ts,
             blocks: block,
         };
-
+  
         let options = {
             method: "POST",
             contentType:"application/json",
@@ -43,10 +43,10 @@ class messageHandler{
             },
             payload: JSON.stringify(payload),
         };
-
+  
         UrlFetchApp.fetch(url, options);
     }
-
+  
     static postMessageWithoutBlock(channelID, text) {
         var url = "https://slack.com/api/chat.postMessage";
         var payload = {
@@ -64,7 +64,7 @@ class messageHandler{
         };
         return UrlFetchApp.fetch(url, options);
     }
-
+  
     static postMessage(channelID, text, block) {
         const url = "https://slack.com/api/chat.postMessage";
         const payload = {
@@ -83,4 +83,5 @@ class messageHandler{
         };
         return UrlFetchApp.fetch(url, options);
     }
-}
+  }
+  

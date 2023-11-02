@@ -4,15 +4,15 @@ class utils {
             if(key == "blocks" || key == "block"){
                 return obj[key];
             }
-
+  
             if(obj[key] != undefined){
                 this.extractBlock(obj[key]);
             }
         }
-
+  
         return undefined;
     }
-
+  
     static extractIDFromBlock(blocksArr){
         let blockId = "";
         if(Array.isArray(blocksArr)){
@@ -24,7 +24,7 @@ class utils {
         }
         return blockId;
     }
-
+  
     static getLastBlockIndex(blocksArr){
         let lastIndex = 1;
         if(Array.isArray(blocksArr)){
@@ -37,14 +37,14 @@ class utils {
         }
         return lastIndex;
     }
-
+  
     static removeWhiteSpace(wordArr) {
         if (wordArr[0] === "") {
             wordArr.shift();
         }
         return wordArr;
     }
-
+  
     static getOption(){
         return {
             "method" : "get",
@@ -53,4 +53,4 @@ class utils {
             }
         }
     }
-}
+  }

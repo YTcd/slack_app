@@ -12,30 +12,37 @@ function doPost(e) {
         messageHandler.postMessage(TEST_CHANNEL_ID,"",JSON.stringify(voteBlockGenerator.getBlockWithDeleteButton("catch Error")));
         return ContentService.createTextOutput(JSON.stringify()).setMimeType(ContentService.MimeType.JSON);
     }
-}
-
-// /로 시작하는 커맨드를 실행 했을때
-function onCommand(e) {
+  }
+  
+  // /로 시작하는 커맨드를 실행 했을때
+  function onCommand(e) {
     switch (e.parameter.command) {
         case "/metavote":
             voting.voteStart(e);
             break;
+        case "/go":
+            dampiGo();
+            break;
     }
-}
-
-function onButtonClicked(value, payload) {
+  }
+  
+  function onButtonClicked(value, payload) {
     const messageId = payload.container.message_ts;
     const channelID = payload.channel.id;
     if(value == "delete"){
         messageHandler.deleteMessage(channelID,messageId);
         sheetHandler.clearRecentVoteBlock();
     }
-
+  
     if(value && value.indexOf("vote_0") != -1){
         voting.updateVotesReceived(payload);
     };
-
+  
     if(value == "addItem"){
         voting.addVoteItem(payload);
     }
-}
+  
+    if(value == "leGo" || value == "cantGo" || value == "waitASec"){
+      smoke.updateBlock(payload, value);
+    }
+  }
