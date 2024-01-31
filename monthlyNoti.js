@@ -1,12 +1,23 @@
 class monthlyNoti {
   static notiMonthly() {
     let today = Utilities.formatDate(new Date(), "GMT+09:00", "yyyy-MM-dd");
+
     const day = today.slice(-2);
     const month = today.slice(5, 7);
     const year = today.slice(0, 4);
     const weekDay = new Date(today).getDay();
+
+    const lastDayOfThisMonth = Utilities.formatDate(
+      new Date(year, month, 0),
+      "GMT+09:00",
+      "dd"
+    );
+
     // 오늘이 평일이며 이번달의 마지막 영업일인가
-    if (this.isWeekDay(weekDay) && this.isLastWorkDay(year, month, day)) {
+    if (
+      this.isWeekDay(weekDay) &&
+      this.isLastWorkDay(year, month, day, lastDayOfThisMonth)
+    ) {
       const block = blockGenerator.generateBizCheckBlock();
       messageHandler.postMessage(CLIENT_DEV_ID, "", block);
     } else {
@@ -14,20 +25,10 @@ class monthlyNoti {
     }
   }
 
-  static isLastWorkDay(year, month, day) {
-    let dayNumber = day - 0;
-    const remainDay = [];
-    while (1) {
-      dayNumber++;
-      const weekDay = new Date(`${year}-${month}-${dayNumber}`).getDay();
-      // 평일만 기록
-      if (this.isWeekDay(weekDay)) {
-        remainDay.push(dayNumber);
-      }
-      // 월말이면 중지
-      if (this.isEndOfMonth(month, dayNumber)) {
-        break;
-      }
+  static isLastWorkDay(year, month, day, lastDayOfThisMonth) {
+    // 이번 월의 마지막날과 7일 이상 차이나면 일단 false
+    if (lastDayOfThisMonth - day > 7) {
+      return false;
     }
 
     const holidayRef = HOLIDAY_JSON_URL;
@@ -47,22 +48,31 @@ class monthlyNoti {
       return false;
     }
 
-    // 남은 평일들이 공휴일이라면 true
-    if (this.isDeletedHoliday(year, month, remainDay, holidays)) {
+    // 주말도, 공휴일도 아닌데 이번 월의 마지막 날이라면 true
+    if (day == lastDayOfThisMonth) {
       return true;
     }
 
-    // 남은 날이 오늘이고, 오늘이 말일이다.
-    if (
-      remainDay.length == 1 &&
-      this.isEndOfMonth(month, remainDay[0] - 0) &&
-      remainDay[0] - 1 == day
-    ) {
-      return true;
+    let remainDay = [];
+    let dayNumber = lastDayOfThisMonth;
+    while (1) {
+      if (dayNumber <= day) {
+        break;
+      }
+      const weekDay = new Date(`${year}-${month}-${dayNumber}`).getDay();
+      if (this.isWeekDay(weekDay)) {
+        remainDay.push(dayNumber - 0);
+      }
+      dayNumber--;
     }
 
-    // 영업일이 남아있다.
-    return false;
+    // 남은 날짜들에서 공휴일 제거
+    const result = remainDay.filter((rd) => {
+      return !this.isTodayHoliday(year, month, rd, holidays);
+    });
+
+    // 공휴일을 제거하고나서 아무것도 남지 않았다면 오늘이 월말
+    return result.length == 0;
   }
 
   static isTodayHoliday(year, month, day, holidays) {
@@ -75,64 +85,7 @@ class monthlyNoti {
     return boolean;
   }
 
-  static isDeletedHoliday(year, month, dayArr, holidays) {
-    const thisMonthData = [];
-    holidays.forEach((value) => {
-      if (value.slice(5, 7) == month) {
-        thisMonthData.push(value);
-      }
-    });
-
-    // 남은 평일 카운트
-    let count = dayArr.length;
-
-    const staticCount = dayArr.length;
-    let sliceCount = 0;
-
-    // 공휴일 걸러냄
-    dayArr.forEach((day) => {
-      thisMonthData.forEach((month) => {
-        if (month.slice(-2) == day) {
-          count--;
-          sliceCount++;
-        }
-      });
-    });
-
-    return count == 0 && staticCount >= sliceCount;
-  }
-
   static isWeekDay(weekDayNumber) {
-    switch (weekDayNumber) {
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-        return true;
-      case 6:
-      case 0:
-        return false;
-    }
-  }
-
-  static isEndOfMonth(month, day) {
-    switch (month) {
-      case "01":
-      case "03":
-      case "05":
-      case "07":
-      case "08":
-      case "10":
-      case "12":
-        return day >= 31;
-      case "04":
-      case "06":
-      case "09":
-      case "11":
-        return day >= 30;
-      case "02":
-        return day >= 28;
-    }
+    return !(weekDayNumber == 6 || weekDayNumber == 0);
   }
 }
