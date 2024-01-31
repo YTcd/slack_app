@@ -17,6 +17,9 @@ function doGet(e) {
       case "workFromHome":
         workFromHomeNotify();
         break;
+      case "workFromHomeReminder":
+        workFromHomeReminder();
+        break;
     }
   }
 }

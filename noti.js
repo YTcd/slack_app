@@ -1,3 +1,13 @@
+function workFromHomeReminder() {
+  const biweekly = workFromHomeRange.getValue();
+  if (biweekly == false) {
+    return;
+  }
+
+  let block = blockGenerator.getWorkFromHomeRemiderBlock();
+  messageHandler.postMessage(META_CHANNEL_ID, "", block);
+}
+
 function workFromHomeNotify() {
   workFromHomeNoti.notiWorkFromHome();
 }

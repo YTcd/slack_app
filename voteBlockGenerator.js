@@ -184,7 +184,7 @@ class blockGenerator {
         type: "section",
         text: {
           type: "plain_text",
-          text: ":white_circle:   :white_circle:   :red_circle:   :white_circle:",
+          text: ":white_circle:   :white_circle:   :white_circle:   :white_circle:",
         },
       },
       {
@@ -266,6 +266,18 @@ class blockGenerator {
             url: "https://docs.google.com/spreadsheets/d/1PF15XSOzxppYCvHebxYS5PtFxsrDuqb5QQFPuQnPihA",
           },
         ],
+      },
+    ];
+  }
+
+  static getWorkFromHomeRemiderBlock() {
+    return [
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: "금주 재택 신청해주세요.",
+        },
       },
     ];
   }

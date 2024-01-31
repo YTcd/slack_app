@@ -1,5 +1,13 @@
 class workFromHomeNoti {
   static notiWorkFromHome() {
+    const biweekly = workFromHomeRange.getValue();
+    if (biweekly == true) {
+      workFromHomeRange.setValue(false);
+    } else {
+      workFromHomeRange.setValue(true);
+      return;
+    }
+
     const jaetaeckSheet = SpreadsheetApp.openByUrl(JAETAECKSHEETLINK);
     const recentSheet = jaetaeckSheet.getSheets();
     //시트 있는지 확인
