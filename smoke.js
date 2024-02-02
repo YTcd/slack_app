@@ -41,15 +41,7 @@ class smoke {
 
     tempArr[userIndex] = switchedText;
     block[2].text.text =
-      ":" +
-      tempArr[0] +
-      ":   :" +
-      tempArr[1] +
-      ":   :" +
-      tempArr[2] +
-      ":   :" +
-      tempArr[3] +
-      ":";
+      ":" + tempArr[0] + ":   :" + tempArr[1] + ":   :" + tempArr[2] + ":";
     dampiBlockRange.setValue(JSON.stringify(block));
 
     messageHandler.updateMessage(channelID, messageTs, block);
@@ -57,8 +49,7 @@ class smoke {
     if (
       tempArr[0] != "white_circle" &&
       tempArr[1] != "white_circle" &&
-      tempArr[2] != "white_circle" &&
-      tempArr[3] != "white_circle"
+      tempArr[2] != "white_circle"
     ) {
       messageHandler.postMessageWithoutBlock(
         META_SMOKE_ID,

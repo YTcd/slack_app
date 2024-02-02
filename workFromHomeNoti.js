@@ -32,7 +32,7 @@ class workFromHomeNoti {
     }
 
     const appTeamRange = recentSheet[0].getRange(13, 4, 5, 1);
-    const metaTeamRange = recentSheet[0].getRange(21, 4, 11, 1);
+    const metaTeamRange = recentSheet[0].getRange(21, 4, 10, 1);
     const appValues = appTeamRange.getValues();
     const metaValues = metaTeamRange.getValues();
 
