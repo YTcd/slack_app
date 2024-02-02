@@ -1,3 +1,7 @@
+function dailyWorkUpdateNoti() {
+  dailyWorkUpdate.dailyNoti();
+}
+
 function workFromHomeReminder() {
   const biweekly = workFromHomeRange.getValue();
   if (biweekly == false) {

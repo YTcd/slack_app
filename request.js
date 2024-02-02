@@ -20,6 +20,9 @@ function doGet(e) {
       case "workFromHomeReminder":
         workFromHomeReminder();
         break;
+      case "dailyWorkUpdate":
+        dailyWorkUpdateNoti();
+        break;
     }
   }
 }

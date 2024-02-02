@@ -177,14 +177,14 @@ class blockGenerator {
         type: "section",
         text: {
           type: "plain_text",
-          text: "선임 영태 태호 종원",
+          text: "선임 영태 태호",
         },
       },
       {
         type: "section",
         text: {
           type: "plain_text",
-          text: ":white_circle:   :white_circle:   :white_circle:   :white_circle:",
+          text: ":white_circle:   :white_circle:   :white_circle:",
         },
       },
       {
@@ -230,6 +230,33 @@ class blockGenerator {
           type: "mrkdwn",
           text: "오늘은 " + name + "님의 생일입니다! 다들 축하해주세요!",
         },
+      },
+    ];
+  }
+
+  static getDailyWorkBlock(text) {
+    return [
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: text + " 일일업무 시트 업데이트 해주세요.",
+        },
+      },
+      {
+        type: "actions",
+        elements: [
+          {
+            type: "button",
+            text: {
+              type: "plain_text",
+              text: "일일 업무 시트",
+              emoji: true,
+            },
+            value: "click_me_123",
+            url: "https://docs.google.com/spreadsheets/d/10tx3du8VaVve9HPuMjNvu6FEseYuBATQ8DItfM6rrPE/",
+          },
+        ],
       },
     ];
   }
