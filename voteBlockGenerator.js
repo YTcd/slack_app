@@ -280,7 +280,7 @@ class blockGenerator {
               text: "재택 신청",
               emoji: true,
             },
-            url: "https://ep.doubledown.com/",
+            url: "https://doubleugames.tigris5240.com/",
           },
           {
             type: "button",
@@ -290,7 +290,7 @@ class blockGenerator {
               emoji: true,
             },
             value: "click_me_123",
-            url: "https://docs.google.com/spreadsheets/d/1PF15XSOzxppYCvHebxYS5PtFxsrDuqb5QQFPuQnPihA",
+            url: "https://docs.google.com/spreadsheets/d/1M81l_GDRSleYSuX2RCShA0KOyENCzbJJENafk22g5c4",
           },
         ],
       },

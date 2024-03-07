@@ -67,6 +67,9 @@ function onCommand(e) {
     case "/checkseason":
       seasonalAssetCheck.showCheckSeasonlMenu(e.parameter);
       break;
+    case "/clearVote":
+      sheetHandler.clearRecentVoteBlock();
+      break;
   }
 }
 
