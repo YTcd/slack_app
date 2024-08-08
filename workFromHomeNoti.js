@@ -1,3 +1,8 @@
+const APP_RANGE = 13;
+const APP_NUMBER_OF_PEOPLE = 5;
+const META_RANGE = APP_RANGE + APP_NUMBER_OF_PEOPLE;
+const META_NUMBER_OF_PEOPLE = 11;
+
 class workFromHomeNoti {
   static notiWorkFromHome() {
     const biweekly = workFromHomeRange.getValue();
@@ -31,8 +36,8 @@ class workFromHomeNoti {
       return;
     }
 
-    const appTeamRange = recentSheet[0].getRange(13, 4, 5, 1);
-    const metaTeamRange = recentSheet[0].getRange(21, 4, 10, 1);
+    const appTeamRange = recentSheet[0].getRange(APP_RANGE, 4, APP_NUMBER_OF_PEOPLE, 1);
+    const metaTeamRange = recentSheet[0].getRange(META_RANGE, 4, META_NUMBER_OF_PEOPLE, 1);
     const appValues = appTeamRange.getValues();
     const metaValues = metaTeamRange.getValues();
 
@@ -40,7 +45,7 @@ class workFromHomeNoti {
 
     appValues.forEach((v, index) => {
       if (v == "") {
-        const nameRange = recentSheet[0].getRange(13 + index, 2, 1, 1);
+        const nameRange = recentSheet[0].getRange(APP_RANGE + index, 2, 1, 1);
         const name = nameRange.getValue() + "";
         if (APP_TEAM_ID_LIST[name]) {
           hasNotDoneItYet.push("<@" + APP_TEAM_ID_LIST[name] + "> ");
@@ -51,7 +56,7 @@ class workFromHomeNoti {
     });
     metaValues.forEach((v, index) => {
       if (v == "") {
-        const nameRange = recentSheet[0].getRange(21 + index, 2, 1, 1);
+        const nameRange = recentSheet[0].getRange(META_RANGE + index, 2, 1, 1);
         const name = nameRange.getValue() + "";
         if (TEAM_MATE_ID_LIST[name]) {
           hasNotDoneItYet.push("<@" + TEAM_MATE_ID_LIST[name] + "> ");

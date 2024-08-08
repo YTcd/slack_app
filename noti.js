@@ -1,3 +1,7 @@
+function healthKeeperNoti() {
+  healthKeeper.healthKeeperNotiAuto();
+}
+
 function dailyWorkUpdateNoti() {
   dailyWorkUpdate.dailyNoti();
 }
@@ -37,7 +41,7 @@ function coffeeNoti() {
   ]);
 
   sheetHandler.updateRecentVoteBlock(block);
-  messageHandler.postMessage(META_CHANNEL_ID, "", block);
+  messageHandler.postMessage(META_CONTENTS_ID, "", block);
 }
 
 function monthlyBizNoti() {

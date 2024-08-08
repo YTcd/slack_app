@@ -1,7 +1,7 @@
 class dailyWorkUpdate {
   static dailyNoti() {
     const today = Utilities.formatDate(new Date(), "GMT+09:00", "yyyy-MM-dd");
-
+    
     const weekDayNumber = new Date(today).getDay();
     if (this.isWeekDay(weekDayNumber) == false) {
       return;
@@ -15,17 +15,17 @@ class dailyWorkUpdate {
       SpreadsheetApp.openByUrl(DAILYWORKSHEETLINK).getSheets()[0];
 
     const platformNameArray = dailyWorkSheet.getRange(4, 3, 4, 1).getValues();
-    const contentsNameArray = dailyWorkSheet.getRange(9, 3, 6, 1).getValues();
-    const appNameArray = dailyWorkSheet.getRange(16, 3, 5, 1).getValues();
+    const contentsNameArray = dailyWorkSheet.getRange(9, 3, 7, 1).getValues();
+    const appNameArray = dailyWorkSheet.getRange(17, 3, 5, 1).getValues();
 
     const platformDateArray = dailyWorkSheet
       .getRange(4, 5, 4, 1)
       .getDisplayValues();
     const contentsDateArray = dailyWorkSheet
-      .getRange(9, 5, 6, 1)
+      .getRange(9, 5, 7, 1)
       .getDisplayValues();
     const appDateArray = dailyWorkSheet
-      .getRange(16, 5, 5, 1)
+      .getRange(17, 5, 5, 1)
       .getDisplayValues();
 
     let text = "";

@@ -1,47 +1,41 @@
-function notiT() {
-  messageHandler.postMessageOnlyVisible(
-    TEST_CHANNEL_ID,
-    "test",
-    blockGenerator.seasonalAssetsCheckBlock(),
-    "U02P3FADY02"
-  );
+function notiT(){
+  var today = new Date();
+
+// GMT+09:00 시간대 설정
+today.setHours(today.getHours() + 9);
+
+// 월과 일을 MMdd 형식으로 가져오기
+var month = (today.getUTCMonth() + 1).toString().padStart(2, '0');
+var day = today.getUTCDate().toString().padStart(2, '0');
+
+// 결과 출력
+var result = month + day;
+Logger.log(result);
 }
 
 const test = [
-  {
-    type: "section",
-    text: { type: "mrkdwn", text: "a" },
-    accessory: {
-      type: "button",
-      text: { type: "plain_text", text: "메시지 삭제" },
-      style: "primary",
-      value: "delete_confirm",
-    },
+{
+  type: "section",
+  text: { type: "mrkdwn", text: "a" },
+  accessory: {
+    type: "button",
+    text: { type: "plain_text", text: "메시지 삭제" },
+    style: "primary",
+    value: "delete_confirm",
   },
+}
 ];
 
-function ad() {
+function ad(){
   Logger.log(JSON.stringify(voteLogSheet.getLastRow()));
 }
 
-function modelTest() {
-  model.init();
-  model.setBlock(3);
-  model.setSome("ad");
-  model.syncUsedData();
-}
-
 // 순서 : SpreadsheetApp.openByUrl > setValue > getRange > getSheetByName > getValue 순으로 느림
-function delayTest1() {
-  const startTime = Date.now();
+function delayTest1(){
+const startTime = Date.now();
+const sheet = SpreadsheetApp.openByUrl(SPRITESHEETLINK);
+for(let i = 0; i<1000; i++){
   const sheet = SpreadsheetApp.openByUrl(SPRITESHEETLINK);
-  //const model = sheet.getSheetByName("모델");
-  //const recentVoteBlockRange = model.getRange(1,2,1,1);
-  for (let i = 0; i < 1000; i++) {
-    const sheet = SpreadsheetApp.openByUrl(SPRITESHEETLINK);
-    //const recentVoteBlockRange = model.getRange(1,2,1,1);
-    //const a = recentVoteBlockRange.getValue();
-    //recentVoteBlockRange.setValue(i);
-  }
-  Logger.log(Date.now() - startTime);
+}
+Logger.log(Date.now() - startTime);
 }

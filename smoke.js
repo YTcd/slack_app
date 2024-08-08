@@ -41,7 +41,13 @@ class smoke {
 
     tempArr[userIndex] = switchedText;
     block[2].text.text =
-      ":" + tempArr[0] + ":   :" + tempArr[1] + ":   :" + tempArr[2] + ":";
+      ":" +
+      tempArr[0] +
+      ":   :" +
+      tempArr[1] +
+      ":   :" +
+      tempArr[2] +
+      ":";
     dampiBlockRange.setValue(JSON.stringify(block));
 
     messageHandler.updateMessage(channelID, messageTs, block);
