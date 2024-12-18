@@ -26,7 +26,11 @@ function bitrhdayNotify() {
 
 function dampiGo(e) {
   let block = blockGenerator.getDamPiBlock(e);
-  dampiBlockRange.setValue(JSON.stringify(block));
+  const stringBlock = JSON.stringify(block);
+
+  const cache = CacheService.getScriptCache();
+  cache.remove(CACHE_KEY_SMOKE);
+  cache.put(CACHE_KEY_SMOKE, stringBlock, 21600);
   messageHandler.postMessage(META_SMOKE_ID, "", block);
 }
 
@@ -49,7 +53,7 @@ function monthlyBizNoti() {
 }
 
 function clearVotingLog() {
-  sheetHandler.clearRecentVoteBlock();
+  sheetHandler.clearRecentVoteBlock("schedule");
 }
 
 //목요일 재택 공지
