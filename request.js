@@ -11,7 +11,7 @@ function doGet(e) {
       case "monthlyBiz":
         monthlyBizNoti();
         break;
-      case "clearVote":
+      case "clearvote":
         clearVotingLog();
         break;
       case "workFromHome":
@@ -67,8 +67,9 @@ function onCommand(e) {
     case "/checkseason":
       seasonalAssetCheck.showCheckSeasonlMenu(e.parameter);
       break;
-    case "/clearVote":
-      sheetHandler.clearRecentVoteBlock();
+    case "/clearvote":
+      const channelid = e.parameter.channel_id;
+      sheetHandler.clearRecentVoteBlock(channelid);
       break;
   }
 }
@@ -78,7 +79,7 @@ function onButtonClicked(value, payload) {
   const channelID = payload.channel.id;
   if (value == "delete") {
     messageHandler.deleteMessage(channelID, messageId);
-    sheetHandler.clearRecentVoteBlock();
+    sheetHandler.clearRecentVoteBlock(channelID);
   }
 
   if (value && value.indexOf("vote_0") != -1) {

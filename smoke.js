@@ -14,7 +14,8 @@ class smoke {
       return;
     }
 
-    const blockValue = dampiBlockRange.getValue();
+    const cache = CacheService.getScriptCache();
+    const blockValue = cache.get(CACHE_KEY_SMOKE);
     const block = JSON.parse(blockValue);
     const current = block[2].text.text;
 
@@ -41,14 +42,9 @@ class smoke {
 
     tempArr[userIndex] = switchedText;
     block[2].text.text =
-      ":" +
-      tempArr[0] +
-      ":   :" +
-      tempArr[1] +
-      ":   :" +
-      tempArr[2] +
-      ":";
-    dampiBlockRange.setValue(JSON.stringify(block));
+      ":" + tempArr[0] + ":   :" + tempArr[1] + ":   :" + tempArr[2] + ":";
+
+    cache.put(CACHE_KEY_SMOKE, JSON.stringify(block));
 
     messageHandler.updateMessage(channelID, messageTs, block);
 
