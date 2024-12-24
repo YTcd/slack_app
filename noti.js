@@ -47,7 +47,7 @@ function coffeeNoti() {
     "아이스라떼",
   ]);
 
-  sheetHandler.updateRecentVoteBlock(block);
+  sheetHandler.updateRecentVoteBlock(META_CONTENTS_ID, block);
   messageHandler.postMessage(META_CONTENTS_ID, "", block);
 }
 

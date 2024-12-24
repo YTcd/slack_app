@@ -11,18 +11,19 @@ class sheetHandler {
       const cache = CacheService.getScriptCache();
       cache.remove(channel_id);
     }
-    recentVoteBlockRange.setValue(null);
   }
 
-  static getVoteBlockBySheet() {
-    let value = recentVoteBlockRange.getValue();
+  static getVoteBlockBySheet(channelId) {
+    const cache = CacheService.getScriptCache();
+    let value = cache.get(channelId);
     if (value) {
       return JSON.parse(value);
     }
     return undefined;
   }
 
-  static updateRecentVoteBlock(block) {
-    recentVoteBlockRange.setValue(block);
+  static updateRecentVoteBlock(channelID, block) {
+    const cache = CacheService.getScriptCache();
+    cache.put(channelID,block);
   }
 }

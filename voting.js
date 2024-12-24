@@ -2,7 +2,7 @@ class voting {
   static voteStart(e) {
     const channelId = e.parameter.channel_id;
 
-    if (sheetHandler.getVoteBlockBySheet()) {
+    if (sheetHandler.getVoteBlockBySheet(channelId)) {
       messageHandler.postMessageWithoutBlock(
         channelId,
         "이미 진행중인 투표가 있습니다."
@@ -16,7 +16,7 @@ class voting {
       wordArr = utils.removeWhiteSpace(wordArr);
       const block = blockGenerator.makeVoteBlock(wordArr);
 
-      sheetHandler.updateRecentVoteBlock(block);
+      sheetHandler.updateRecentVoteBlock(channelId, block);
       messageHandler.postMessage(channelId, "", block);
     } else {
       messageHandler.postMessageWithoutBlock(
@@ -29,7 +29,7 @@ class voting {
   static updateVotesReceived(payload) {
     const userID = payload.user.id;
     const channelID = payload.channel.id;
-    const block = sheetHandler.getVoteBlockBySheet();
+    const block = sheetHandler.getVoteBlockBySheet(channelID);
     const messageTs = payload.container.message_ts;
     const value = payload.actions[0].value;
 
@@ -70,7 +70,7 @@ class voting {
       block[itemIndex * 2 + 3].elements[0].text = chosenCnt * 1 + 1 + "표";
     }
 
-    sheetHandler.updateRecentVoteBlock(JSON.stringify(block));
+    sheetHandler.updateRecentVoteBlock(channelID, JSON.stringify(block));
     messageHandler.updateMessage(channelID, messageTs, block);
   }
 
@@ -105,7 +105,7 @@ class voting {
       block.push(...slicedBlock);
     }
 
-    sheetHandler.updateRecentVoteBlock(JSON.stringify(block));
+    sheetHandler.updateRecentVoteBlock(channelID, JSON.stringify(block));
     messageHandler.updateMessage(channelID, messageTs, block);
   }
 }
