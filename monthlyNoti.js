@@ -1,3 +1,8 @@
+function instantNoti() {
+  const block = blockGenerator.generateBizCheckBlock();
+  messageHandler.postMessage(CLIENT_DEV_ID, "", block);
+}
+
 class monthlyNoti {
   static notiMonthly() {
     let today = Utilities.formatDate(new Date(), "GMT+09:00", "yyyy-MM-dd");

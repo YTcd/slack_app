@@ -5,6 +5,9 @@ const META_NUMBER_OF_PEOPLE = 11;
 
 class workFromHomeNoti {
   static notiWorkFromHome() {
+    const spriteSheet = SpreadsheetApp.openByUrl(SPRITESHEETLINK);
+    const voteLogSheet = spriteSheet.getSheetByName("투표 로그");
+    const workFromHomeRange = voteLogSheet.getRange(5,2,1,1);
     const biweekly = workFromHomeRange.getValue();
     if (biweekly == true) {
       workFromHomeRange.setValue(false);

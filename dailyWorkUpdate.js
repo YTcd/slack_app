@@ -1,3 +1,10 @@
+const DW_META_PLATPORM_RANGE = 4;
+const DW_META_PLATPORM_COUNT = 4;
+const DW_META_CONTENTS_RANGE = DW_META_PLATPORM_RANGE + DW_META_PLATPORM_COUNT + 1;
+const DW_META_CONTENTS_COUNT = 7;
+const DW_APP_RANGE = DW_META_CONTENTS_RANGE + DW_META_CONTENTS_COUNT + 1;
+const DW_APP_COUNTE = 5;
+
 class dailyWorkUpdate {
   static dailyNoti() {
     const today = Utilities.formatDate(new Date(), "GMT+09:00", "yyyy-MM-dd");
@@ -14,9 +21,9 @@ class dailyWorkUpdate {
     const dailyWorkSheet =
       SpreadsheetApp.openByUrl(DAILYWORKSHEETLINK).getSheets()[0];
 
-    const platformNameArray = dailyWorkSheet.getRange(4, 3, 4, 1).getValues();
-    const contentsNameArray = dailyWorkSheet.getRange(9, 3, 7, 1).getValues();
-    const appNameArray = dailyWorkSheet.getRange(17, 3, 5, 1).getValues();
+    const platformNameArray = dailyWorkSheet.getRange(DW_META_PLATPORM_RANGE, 3, DW_META_PLATPORM_COUNT, 1).getValues();
+    const contentsNameArray = dailyWorkSheet.getRange(DW_META_CONTENTS_RANGE, 3, DW_META_CONTENTS_COUNT, 1).getValues();
+    const appNameArray = dailyWorkSheet.getRange(DW_APP_RANGE, 3, DW_APP_COUNTE, 1).getValues();
 
     const platformDateArray = dailyWorkSheet
       .getRange(4, 5, 4, 1)

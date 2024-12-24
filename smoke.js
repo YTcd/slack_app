@@ -42,7 +42,13 @@ class smoke {
 
     tempArr[userIndex] = switchedText;
     block[2].text.text =
-      ":" + tempArr[0] + ":   :" + tempArr[1] + ":   :" + tempArr[2] + ":";
+      ":" +
+      tempArr[0] +
+      ":   :" +
+      tempArr[1] +
+      ":   :" +
+      tempArr[2] +
+      ":";
 
     cache.put(CACHE_KEY_SMOKE, JSON.stringify(block));
 

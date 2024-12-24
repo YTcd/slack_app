@@ -22,7 +22,7 @@ class healthKeeper {
     }
 
     let mainSheet = SpreadsheetApp.openByUrl(mainSheetUrl).getSheetByName("헬스키퍼 가이드");
-    let link = this.get16FLinkUrl(mainSheet);
+    let link = this.get13FLinkUrl(mainSheet);
     let healthKeeperSheet = SpreadsheetApp.openByUrl(link).getActiveSheet();
 
     const todaysList = this.getTodaysList(healthKeeperSheet, day-0);
@@ -45,9 +45,6 @@ class healthKeeper {
         }        
       }
     }
-
-    // 현재 시간과 리스트에 있는 시간 차이 구하기
-    // 대상자가 우리팀인지 확인
   }
 
   // 오늘 예약한 사람들의 리스트를 리턴
@@ -97,9 +94,9 @@ class healthKeeper {
     return todayColumnIndex;
   }
 
-  // 16층 예약 시트 링크 리턴
-  static get16FLinkUrl(spreadsheet) {
-    let range = spreadsheet.getRange(22, 1, 1, 1);
+  // 13층 예약 시트 링크 리턴
+  static get13FLinkUrl(spreadsheet) {
+    let range = spreadsheet.getRange(21, 1, 1, 1);
     let link = range.getRichTextValue().getLinkUrl();
     return link;
   }

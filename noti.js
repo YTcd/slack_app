@@ -7,6 +7,9 @@ function dailyWorkUpdateNoti() {
 }
 
 function workFromHomeReminder() {
+  const spriteSheet = SpreadsheetApp.openByUrl(SPRITESHEETLINK);
+  const voteLogSheet = spriteSheet.getSheetByName("투표 로그");
+  const workFromHomeRange = voteLogSheet.getRange(5,2,1,1);
   const biweekly = workFromHomeRange.getValue();
   if (biweekly == false) {
     return;
@@ -30,7 +33,7 @@ function dampiGo(e) {
 
   const cache = CacheService.getScriptCache();
   cache.remove(CACHE_KEY_SMOKE);
-  cache.put(CACHE_KEY_SMOKE, stringBlock, 21600);
+  cache.put(CACHE_KEY_SMOKE,stringBlock, 21600);
   messageHandler.postMessage(META_SMOKE_ID, "", block);
 }
 
